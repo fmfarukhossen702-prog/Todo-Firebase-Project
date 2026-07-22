@@ -10,7 +10,7 @@ import {
 } from "firebase/database";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
-
+// import image from '../assets/images.jpeg'
 const Todo = () => {
   const [task, setTask] = useState("");
   const [data, setData] = useState([]);
@@ -69,9 +69,10 @@ const Todo = () => {
     const db = getDatabase();
     remove(ref(db, "/todoName/"));
   };
+  
   return (
-    <div>
-      <form className=" mx-auto mt-20 fieldset bg-[#d2cfcfe8] border-base-300 rounded-box w-full lg:w-lg border p-10 ">
+    <div className=" bg-[#d43d3d] text-white! bg-[url(./assets/images.jpeg)] bg-cover flex justify-center items-center   bg-center bg-no-repeat w-full h-screen ">
+      <form className="  fieldset bg-[#ffffff14] border-base-300 rounded-box w-full lg:w-lg border p-10 ">
         <h1 className=" text-4xl text-center mb- ">Todo Application</h1>
         <fieldset className=" fieldset">
           <label className="label font-semibold text-lg mt-4 ">
@@ -83,22 +84,31 @@ const Todo = () => {
             }
             type="text"
             value={edit ? value : task}
-            className="input w-full my-3"
+            className="input bg-[#ffffff42] w-full my-3"
             placeholder="text"
           />
           {data.length > 0 && (
-            <div
-              onClick={handleAllData}
-              className="flex items-center gap-2 text-[#ca0a0a] text-[14px]  cursor-pointer"
-            >
-              All data <FaTrashCan />
+            <div className=" flex justify-between items-center">
+              <div
+                onClick={handleAllData}
+                className="flex items-center gap-2 text-[#ca0a0a] text-[14px]  cursor-pointer"
+              >
+                All data <FaTrashCan />
+              </div>
+
+              <button
+                onClick={handleClick}
+                className=" cursor-pointer bg-[#000] rounded-[10px] text-white  py-2 px-4 "
+              >
+                Submit
+              </button>
             </div>
           )}
           <ul>
             {data.map((item, index) => (
               <li
                 key={index}
-                className="  w-full my-3 py-3 px-5  rounded-[5px] flex justify-between items-center text-lg bg-[#00000020] "
+                className="  w-full my-3 py-3 px-5  rounded-[5px] flex justify-between items-center text-lg bg-[#ffffff36] "
               >
                 {item.value.todoName}
 

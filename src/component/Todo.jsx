@@ -69,7 +69,7 @@ const Todo = () => {
     const db = getDatabase();
     remove(ref(db, "/todoName/"));
   };
-  
+
   return (
     <div className=" bg-[#d43d3d] text-white! bg-[url(./assets/images.jpeg)] bg-cover flex justify-center items-center   bg-center bg-no-repeat w-full h-screen ">
       <form className="  max-h-[90vh] fieldset bg-[#ffffff14] py-5  border-base-300 rounded-box w-full lg:w-lg border p-10 ">
@@ -96,12 +96,23 @@ const Todo = () => {
                 All data <FaTrashCan />
               </div>
 
-              <button
-                onClick={handleClick}
-                className=" cursor-pointer bg-[#000] rounded-[10px] text-white  py-2 px-4 "
-              >
-                Submit
-              </button>
+              <div>
+                {edit ? (
+                  <button
+                    onClick={handleUpdate}
+                    className="btn btn-neutral mt-4"
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleClick}
+                    className="btn btn-neutral mt-4"
+                  >
+                    Submit
+                  </button>
+                )}
+              </div>
             </div>
           )}
           <ul className="max-h-[350px] overflow-y-auto ">

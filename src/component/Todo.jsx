@@ -72,7 +72,7 @@ const Todo = () => {
   
   return (
     <div className=" bg-[#d43d3d] text-white! bg-[url(./assets/images.jpeg)] bg-cover flex justify-center items-center   bg-center bg-no-repeat w-full h-screen ">
-      <form className="  fieldset bg-[#ffffff14] border-base-300 rounded-box w-full lg:w-lg border p-10 ">
+      <form className="  max-h-[90vh] fieldset bg-[#ffffff14] py-5  border-base-300 rounded-box w-full lg:w-lg border p-10 ">
         <h1 className=" text-4xl text-center mb- ">Todo Application</h1>
         <fieldset className=" fieldset">
           <label className="label font-semibold text-lg mt-4 ">
@@ -104,7 +104,7 @@ const Todo = () => {
               </button>
             </div>
           )}
-          <ul>
+          <ul className="max-h-[350px] overflow-y-auto ">
             {data.map((item, index) => (
               <li
                 key={index}

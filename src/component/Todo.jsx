@@ -10,6 +10,9 @@ import {
 } from "firebase/database";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
+import { FaLocationArrow } from "react-icons/fa";
+import { FaArrowRotateLeft } from "react-icons/fa6";
+
 // import image from '../assets/images.jpeg'
 const Todo = () => {
   const [task, setTask] = useState("");
@@ -71,10 +74,10 @@ const Todo = () => {
   };
 
   return (
-    <div className=" bg-[#d43d3d] text-white! bg-[url(./assets/images.jpeg)] bg-cover flex justify-center items-center   bg-center bg-no-repeat w-full h-screen ">
-      <form className="  max-h-[90vh] fieldset bg-[#ffffff14] py-5  border-base-300 rounded-box w-full lg:w-lg border p-10 ">
+    <div className=" bg-[#d43d3d] text-white! bg-[url(./assets/images.jpeg)] bg-cover  pt-10  bg-center bg-no-repeat h-screen ">
+      <form className="  max-h-[90vh] fieldset bg-[#ffffff14] py-5 mx-auto   border-base-300 rounded-box w-full lg:w-lg border p-10 ">
         <h1 className=" text-4xl text-center mb- ">Todo Application</h1>
-        <fieldset className=" fieldset">
+        <fieldset className="   fieldset">
           <label className="label font-semibold text-lg mt-4 ">
             Enter your task here
           </label>
@@ -88,34 +91,29 @@ const Todo = () => {
             placeholder="text"
           />
           {data.length > 0 && (
-            <div className=" flex justify-between items-center">
+            <div className=" flex justify-between items-center pr-5">
               <div
                 onClick={handleAllData}
-                className="flex items-center gap-2 text-[#ca0a0a] text-[14px]  cursor-pointer"
+                className="flex items-center gap-2 py-1 px-2 bg-[#000000] border border-[#ea1818] rounded-[5px] w-30 justify-center text-[#ca0a0a] text-[14px]  cursor-pointer"
               >
                 All data <FaTrashCan />
               </div>
-
               <div>
                 {edit ? (
-                  <button
+                  <FaArrowRotateLeft
+                    className=" text-[#07c9ff] text-lg  cursor-pointer  "
                     onClick={handleUpdate}
-                    className="btn btn-neutral mt-4"
-                  >
-                    Update
-                  </button>
+                  />
                 ) : (
-                  <button
+                  <FaLocationArrow
+                    className=" text-[#07c9ff] text-lg  cursor-pointer "
                     onClick={handleClick}
-                    className="btn btn-neutral mt-4"
-                  >
-                    Submit
-                  </button>
+                  />
                 )}
               </div>
             </div>
           )}
-          <ul className="max-h-[350px] overflow-y-auto ">
+          <ul className=" max-h-[150px] overflow-y-auto ">
             {data.map((item, index) => (
               <li
                 key={index}

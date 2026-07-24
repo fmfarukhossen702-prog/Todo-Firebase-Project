@@ -21,7 +21,9 @@ const Todo = () => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState("");
   const [idName, setIdName] = useState("");
-  const [line, setLine] = useState(false)
+  const [line, setLine] = useState([])
+  console.log(line)
+
 
   const notify = (type) => {
     if (type === "success") {
@@ -118,10 +120,24 @@ const Todo = () => {
     const db = getDatabase();
     remove(ref(db, "/todoName/"));
   };
-  const handleThrough = ()=> {
-    const db = getDatabase()
-    update(ref(db, "/todoName/" + idName))
-    setLine(!line)
+
+const handleAllRemoveData = () =>{
+      const db = getDatabase();
+      line.forEach((id) =>{
+         remove(ref(db, "/todoName/" +  id));
+      })
+      setLine([])
+
+}
+
+  const handleThrough = (id)=> {
+   if (line.includes(id)){
+    setLine(line.filter((item) =>  item !== id))
+   }else{
+    setLine([...line, id])
+   }
+  
+
   }
 
   return (
@@ -145,12 +161,21 @@ const Todo = () => {
             />
             {data.length > 0 && (
               <div className=" flex justify-between items-center pr-5">
-                <div
-                  onClick={handleAllData}
-                  className="flex items-center gap-2 py-1 px-2 bg-[#000000] border border-[#ea1818] rounded-[5px] w-30 justify-center text-[#ca0a0a] text-[14px]  cursor-pointer"
-                >
-                  All data <FaTrashCan />
-                </div>
+                {line.length > 0 ? (
+                  <div
+                    onClick={ handleAllRemoveData}
+                    className="flex items-center gap-2 py-1 px-2 bg-[#000000] border border-[#ea1818] rounded-[5px] w-30 justify-center text-[#ca0a0a] text-[14px]  cursor-pointer"
+                  >
+                    Remove all select <FaTrashCan />
+                  </div>
+                ) : (
+                  <div
+                    onClick={handleAllData}
+                    className="flex items-center gap-2 py-1 px-2 bg-[#000000] border border-[#ea1818] rounded-[5px] w-30 justify-center text-[#ca0a0a] text-[14px]  cursor-pointer"
+                  >
+                    All data <FaTrashCan />
+                  </div>
+                )}
                 <div>
                   {edit ? (
                     <FaArrowRotateLeft
@@ -167,15 +192,19 @@ const Todo = () => {
               </div>
             )}
             <ul className=" max-h-[150px] overflow-y-auto ">
-              {data.map((item, index) => (
+              {data.map((item) => (
                 <li
-                  key={index}
+                  key={item.id}
                   className="  w-full my-3 py-3 px-5  rounded-[5px] flex justify-between items-center text-lg bg-[#ffffff36] "
                 >
                   <div
-                    className={`flex items-center gap-3 ${line ? "line-through" : "  "} `}
+                    className={`flex items-center gap-3 ${line.includes(item.id) ? "line-through" : "  "} `}
                   >
-                    <input onClick={handleThrough}  className=" cursor-pointer " type="checkbox" />
+                    <input
+                      onClick={() => handleThrough(item.id)}
+                      className=" cursor-pointer "
+                      type="checkbox"
+                    />
                     {item.value.todoName}
                   </div>
 
